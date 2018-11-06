@@ -1,8 +1,11 @@
 // JavaScript source code
 const http = require('http');
+const url = require('url');
 
 const server = http.createServer(function (request, response) {
     response.writeHead(200, { 'content-type': 'text/html; charset=utf8' });
+
+    const parsedUrl = url.parse(request.url, true);
 
     const body = `<!DOCTYPE html>
       	<html>
@@ -11,7 +14,7 @@ const server = http.createServer(function (request, response) {
           <title>Node.js Demo</title>
         </head>
         <body>
-          <h1 style="color:green">Hello World</h1>
+          <h1 style="color:green">Hello ${ parsedUrl.query.name }</h1>
         </body>
       </html>`;
 
